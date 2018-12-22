@@ -1,11 +1,9 @@
 {
-  "name": "nano-ipc-js",
+  "name": "nano-ipc",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js"
-  },
+  "description": "Library for interacting with the Nano node IPC",
+  "main": "src/index.js",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "MIT",
