@@ -1,0 +1,27 @@
+{
+  "name": "nano-ipc-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jspack": "0.0.4"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "parser": "babylon",
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  }
+}
