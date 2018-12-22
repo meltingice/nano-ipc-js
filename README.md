@@ -2,7 +2,7 @@
 
 A Javascript library for interacting with the experimental Nano currency node IPC.
 
-**This code is not production ready and is merely a proof-of-concept. Use at your own risk**
+**This code is not production ready and is merely a proof-of-concept. Use at your own risk.**
 
 ## Example
 

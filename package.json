@@ -1,6 +1,6 @@
 {
   "name": "nano-ipc",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Library for interacting with the Nano node IPC",
   "main": "src/index.js",
   "scripts": {},
