@@ -24,11 +24,8 @@ module.exports = class Client {
         resolve()
       })
 
-      this.socket.setTimeout(15000)
-      this.socket.on('timeout', () => {
-        console.log('Socket timed out')
-        this.disconnect()
-      })
+      this.socket.setTimeout(30000)
+      this.socket.setKeepAlive(true)
 
       this.socket.on('data', this.onData.bind(this))
       this.socket.on('end', () => {
