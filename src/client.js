@@ -11,7 +11,7 @@ const preamble = [PROTOCOL_PREAMBLE_LEAD, PROTOCOL_ENCODING, PROTOCOL_VERSION_MA
 const PACKED_PREAMBLE = new Uint8Array(jspack.Pack('>cBBB', preamble))
 
 module.exports = class Client {
-  constructor(path) {
+  constructor(path = '/tmp/nano') {
     this.path = path
     this.socket = null
     this.connected = false
