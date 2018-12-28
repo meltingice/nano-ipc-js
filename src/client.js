@@ -39,9 +39,11 @@ module.exports = class Client {
   }
 
   disconnect() {
-    this.socket.end(null, null, () => {
-      this.connected = false
-      console.log('Disconnected from IPC')
+    return new Promise((resolve, reject) => {
+      this.socket.end(null, null, () => {
+        this.connected = false
+        resolve()
+      })
     })
   }
 

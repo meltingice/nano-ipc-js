@@ -23,6 +23,8 @@ await client.connect()
 const resp = await client.call({ action: 'block_count' })
 console.log(resp.count, resp.unchecked)
 
+// If we don't disconnect when we're done interacting with the node IPC, your program will
+// hang as there is still an active connection open.
 client.disconnect()
 ```
 
@@ -36,6 +38,10 @@ Creates a new IPC client.
 
 - **path**: Path to the IPC socket on the local filesystem. Defaults to `/tmp/nano`.
 
+#### connect() => Promise
+
+Connects to the node IPC. This is required before making any IPC calls, and you must wait for the connection to be completed. The returned Promise will resolve when connected.
+
 #### call(request) => Promise
 
 Sends a request to the Nano node.
@@ -43,3 +49,9 @@ Sends a request to the Nano node.
 - **request**: The request to send to the node, which should be an object as the client will handle JSON encoding for you.
 
 Returns a Promise, which will receive the node response as a JSON decoded object when the request is completed.
+
+#### disconnect() => Promise
+
+Disconnects from the IPC connection. Returns a Promise that resolves when the connection is closed.
+
+The IPC connection is persistent in order to make requests as fast as possible, so you must manually disconnect from the IPC when your program shuts down otherwise it will hang.
