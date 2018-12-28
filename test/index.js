@@ -1,13 +1,13 @@
-const Client = require('../src/client')
-const client = new Client('/tmp/nano')
+const Client = require('../src/client');
+const client = new Client('/tmp/nano');
 
 async function start() {
-  await client.connect()
+  await client.connect();
 
-  console.log(await client.call({ action: 'block_count' }))
-  console.log(await client.call({ action: 'peers' }))
+  console.log(await client.call({ action: 'block_count' }));
+  console.log(await client.call({ action: 'peers' }));
 
-  client.disconnect()
+  client.disconnect();
 }
 
-start()
+start();

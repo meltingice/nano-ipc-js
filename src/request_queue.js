@@ -3,33 +3,33 @@
 // start to mix together and we can't parse them.
 module.exports = class RequestQueue {
   constructor(client) {
-    this.client = client
-    this.queue = []
-    this.processing = false
+    this.client = client;
+    this.queue = [];
+    this.processing = false;
   }
 
   push(obj) {
     return new Promise((resolve, reject) => {
-      this.queue.push({ resolve, reject, obj })
-      if (!this.processing) this._process()
-    })
+      this.queue.push({ resolve, reject, obj });
+      if (!this.processing) this._process();
+    });
   }
 
   async _process() {
-    this.processing = true
+    this.processing = true;
 
-    const item = this.queue.shift()
+    const item = this.queue.shift();
 
     try {
-      item.resolve(await this.client._execute(item.obj))
+      item.resolve(await this.client._execute(item.obj));
     } catch (e) {
-      item.reject(e)
+      item.reject(e);
     } finally {
       if (this.queue.length > 0) {
-        this._process()
+        this._process();
       } else {
-        this.processing = false
+        this.processing = false;
       }
     }
   }
-}
+};
