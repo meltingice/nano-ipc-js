@@ -3,8 +3,11 @@ const client = new Client('/tmp/nano')
 
 async function start() {
   await client.connect()
-  console.log(await client.send({ action: 'block_count' }))
-  console.log(await client.send({ action: 'peers' }))
+
+  console.log(await client.call({ action: 'block_count' }))
+  console.log(await client.call({ action: 'peers' }))
+
+  client.disconnect()
 }
 
 start()

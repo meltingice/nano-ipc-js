@@ -1,6 +1,8 @@
 const net = require('net')
 const { jspack } = require('jspack')
 
+const RequestQueue = require('./request_queue')
+
 const PROTOCOL_ENCODING = 1
 const PROTOCOL_PREAMBLE_LEAD = 'N'
 const PROTOCOL_VERSION_MAJOR = 1
@@ -13,6 +15,7 @@ module.exports = class Client {
     this.path = path
     this.socket = null
     this.connected = false
+    this.queue = new RequestQueue(this)
   }
 
   connect() {
@@ -46,11 +49,16 @@ module.exports = class Client {
     if (this.listener) this.listener(data)
   }
 
-  send(obj) {
+  call(obj) {
     if (!this.connected) {
       throw new Error('IPC connection is not open')
     }
 
+    return this.queue.push(obj)
+  }
+
+  // This will be called by the RequestQueue. Do not call this directly.
+  _execute(obj) {
     return new Promise((resolve, reject) => {
       let responseLength
       let response = ''
