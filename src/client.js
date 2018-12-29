@@ -35,6 +35,16 @@ module.exports = class Client {
       this.socket.setKeepAlive(true);
 
       this.socket.on('data', this.onData.bind(this));
+      this.socket.on('error', e => {
+        this.connected = false;
+        console.error(e.message);
+
+        if (this.autoConnect) {
+          console.error('Attempting reconnect in 5 seconds...');
+          setTimeout(this.connect.bind(this), 5000);
+        }
+      });
+
       this.socket.on('end', () => {
         this.connected = false;
         console.log('Connection disconnected');
