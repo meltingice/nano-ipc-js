@@ -32,11 +32,13 @@ client.disconnect()
 
 ### Client
 
-#### constructor([path]) => Client
+#### constructor([path], [options]) => Client
 
 Creates a new IPC client.
 
 - **path**: Path to the IPC socket on the local filesystem. Defaults to `/tmp/nano`.
+- **options**
+  - **autoConnect**: Will automatically connect to the IPC server when attemtping a call, if disconnected. This also allows you to automatically reconnect if the server ever disconnects. Default: true.
 
 #### connect() => Promise
 

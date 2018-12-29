@@ -11,10 +11,11 @@ const preamble = [PROTOCOL_PREAMBLE_LEAD, PROTOCOL_ENCODING, PROTOCOL_VERSION_MA
 const PACKED_PREAMBLE = new Uint8Array(jspack.Pack('>cBBB', preamble));
 
 module.exports = class Client {
-  constructor(path = '/tmp/nano') {
+  constructor(path = '/tmp/nano', options = {}) {
     this.path = path;
     this.socket = null;
     this.connected = false;
+    this.autoConnect = options.autoConnect || true;
     this.queue = new RequestQueue(this);
   }
 
@@ -54,11 +55,8 @@ module.exports = class Client {
     if (this.listener) this.listener(data);
   }
 
-  call(obj) {
-    if (!this.connected) {
-      throw new Error('IPC connection is not open');
-    }
-
+  async call(obj) {
+    if (!this.connected) await this.connect();
     return this.queue.push(obj);
   }
 
