@@ -1,6 +1,6 @@
 {
   "name": "nano-ipc",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Library for interacting with the Nano node IPC",
   "homepage": "https://github.com/meltingice/nano-ipc-js",
   "main": "src/index.js",
