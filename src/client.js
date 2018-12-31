@@ -8,7 +8,7 @@ const PROTOCOL_PREAMBLE_LEAD = 'N';
 const PROTOCOL_VERSION_MAJOR = 1;
 const PROTOCOL_VERSION_MINOR = 0;
 const preamble = [PROTOCOL_PREAMBLE_LEAD, PROTOCOL_ENCODING, PROTOCOL_VERSION_MAJOR, PROTOCOL_VERSION_MAJOR];
-const PACKED_PREAMBLE = new Uint8Array(jspack.Pack('>cBBB', preamble));
+const PACKED_PREAMBLE = Buffer.from(jspack.Pack('>cBBB', preamble));
 
 module.exports = class Client {
   constructor(path = '/tmp/nano', options = {}) {
@@ -89,9 +89,8 @@ module.exports = class Client {
       };
 
       const request = JSON.stringify(obj);
-
       this._write(PACKED_PREAMBLE);
-      this._write(new Uint8Array(jspack.Pack('>I', [request.length])));
+      this._write(Buffer.from(jspack.Pack('>I', [request.length])));
       this._write(request);
     });
   }
