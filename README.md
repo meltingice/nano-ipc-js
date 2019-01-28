@@ -19,7 +19,8 @@ const client = new Client()
 await client.connect()
 
 // Send a request to the Nano node. This works exactly like the old RPC API. Returns a
-// Promise with the Node response.
+// Promise that resolves with the Node response. This library does no processing on the
+// response data.
 const resp = await client.call({ action: 'block_count' })
 console.log(resp.count, resp.unchecked)
 
